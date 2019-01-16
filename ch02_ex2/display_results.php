@@ -35,8 +35,8 @@
         exit(); }
 
     // calculate the future value
-    $remaining_time = 1 - $years % 1;
     $int_years = intval($years);
+    $remaining_time = 1 - $years % $int_years;
     $future_value = $investment;
     for ($i = 1; $i <= $int_years; $i++) {
         $future_value += $future_value * $interest_rate * .01; 
