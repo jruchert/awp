@@ -36,12 +36,13 @@
 
     // calculate the future value
     $int_years = intval($years);
-    $remaining_time = 1 - $years % $int_years;
-    $future_value = $investment;
-    for ($i = 1; $i <= $int_years; $i++) {
-        $future_value += $future_value * $interest_rate * .01; 
+    $future_value = $investment * (1 + $interest_rate * .01) ** $int_years;
+    
+    // explain the partial year
+    $partial_year;
+    if ($years != $int_years) {
+         $partial_year = 'This calculator rounds the number of years down to the nearest whole number.';
     }
-
     // apply currency and percent formatting
     $investment_f = '$'.number_format($investment, 2);
     $yearly_rate_f = $interest_rate.'%';
@@ -59,9 +60,8 @@
 <body>
     <main>
         <h1>Future Value Calculator</h1>
-        
-        <label>Remaining Time:</label>
-        <span><?php echo $remaining_time; ?></span><br>
+
+        <h2><?php echo $partial_year; ?></h2>
 
         <label>Investment Amount:</label>
         <span><?php echo $investment_f; ?></span><br>
@@ -70,7 +70,7 @@
         <span><?php echo $yearly_rate_f; ?></span><br>
 
         <label>Number of Years:</label>
-        <span><?php echo $years; ?></span><br>
+        <span><?php echo $int_years; ?></span><br>
 
         <label>Future Value:</label>
         <span><?php echo $future_value_f; ?></span><br>
